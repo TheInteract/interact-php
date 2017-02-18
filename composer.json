@@ -1,0 +1,11 @@
+{
+    "name": "interact/interact-php",
+    "type": "library",
+    "authors": [
+        {
+            "name": "ChinCluBi",
+            "email": "chinnaporn.s@ku.th"
+        }
+    ],
+    "require": {}
+}
