@@ -12,13 +12,13 @@
     },
     "minimum-stability": "dev",
     "autoload": {
-        "psr-4": {
-            "Interact\\": "src"
+        "psr-0": {
+            "Interact": "./src"
         }
     },
     "autoload-dev": {
-        "psr-4": {
-            "Interact\\": "src"
+        "psr-0": {
+            "Interact": "./src"
         }
     }
 }
