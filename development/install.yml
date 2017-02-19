@@ -1,0 +1,7 @@
+version: '2'
+services:
+    composer:
+        image: composer/composer:php7
+        command: install
+        volumes:
+        - ../:/app
