@@ -1,0 +1,15 @@
+version: '2'
+services:
+    app:
+        image: php:7
+        command: php -S 0.0.0.0:8000 /app/tests/example.php
+        ports:
+        - 8000:8000
+        volumes:
+        - ../:/app
+    composer:
+        image: composer/composer:php7
+        command: install
+        volumes:
+        - ../:/app
+        
