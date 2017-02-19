@@ -1,18 +1,15 @@
 const gulp = require('gulp')
-const watch = require('gulp-watch')
-const run = require('gulp-run')
-const exec = require('gulp-exec')
+const shell = require('gulp-shell')
+const spawn = require('gulp-spawn')
 
 gulp.task('default', ['start'], function() {
-    watch('./src/**/*.php', ['update'])
+    gulp.watch(['./src/**/*.php', './tests/**/*.php'], ['update'])
 })
 
 gulp.task('start', function() {
     return gulp.src('.')
-        .pipe(exec('docker-compose -f ./development/start.yml up'))
+        .pipe(spawn({ cmd: "docker-compos", args: [ "-f", "./development/start.yml", "up" ]}))
+        .pipe(shell(['docker-compose -f ./development/install.yml up']))
 })
 
-gulp.task('update', function() {
-    return gulp.src('.')
-        .pipe(exec('docker-compose -f ./development/update.yml up'))
-})
+gulp.task('update', shell.task(['docker-compose -f ./development/update.yml up']))

@@ -2,7 +2,7 @@ version: '2'
 services:
     composer:
         image: composer/composer:php7
-        command: update
+        command: dump-autoload
         volumes:
         - ../:/app
         

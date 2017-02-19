@@ -7,9 +7,4 @@ services:
         - 8000:8000
         volumes:
         - ../:/app
-    composer:
-        image: composer/composer:php7
-        command: install
-        volumes:
-        - ../:/app
         
