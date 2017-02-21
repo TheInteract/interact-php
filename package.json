@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "mock:server": "nodemon mockServer.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,11 @@
   },
   "homepage": "https://github.com/TheInteract/interact-php#readme",
   "devDependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.1",
     "gulp": "^3.9.1",
     "gulp-shell": "^0.5.2",
-    "gulp-spawn": "^0.3.0"
+    "gulp-spawn": "^0.3.0",
+    "nodemon": "^1.11.0"
   }
 }
