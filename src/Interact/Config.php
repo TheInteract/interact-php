@@ -4,8 +4,8 @@ namespace Interact;
 class Config {
     private static $configs = [
         "server" => [
-            "host" => "localhost",
-            "port" => "9999"
+            "host" => "mockServer",
+            "port" => "9000"
         ]
     ];
     

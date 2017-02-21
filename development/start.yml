@@ -7,4 +7,10 @@ services:
         - 8000:8000
         volumes:
         - ../:/app
-        
+    mockServer:
+        image: node:slim
+        command: sh -c "cd /app; exec npm run mock:server"
+        ports:
+        - 9000:9000
+        volumes:
+        - ../:/app
