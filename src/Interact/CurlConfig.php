@@ -9,9 +9,7 @@ class CurlConfig
     public static function doCurl($customerCode, $userIdentity)
     {
         $ch = curl_init();
-        $CONFIGS = Config::getAll();
-        $CONFIGS_SERVER = $CONFIGS['server'];
-        $url = "http://" . $CONFIGS_SERVER['host'] . ":" . $CONFIGS_SERVER['port'] . "/api/event/oninit";
+        $url = "http://" . Config::SERVER_HOST . ":" . Config::SERVER_PORT . "/api/event/oninit";
         $body = ['customerCode' => $customerCode, 'userIdentity' => $userIdentity];
         
         curl_setopt($ch, CURLOPT_URL, $url);

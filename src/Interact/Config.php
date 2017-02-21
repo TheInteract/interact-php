@@ -2,14 +2,6 @@
 namespace Interact;
 
 class Config {
-    private static $configs = [
-        "server" => [
-            "host" => "mockServer",
-            "port" => "9000"
-        ]
-    ];
-    
-    public static function getAll() {
-        return Config::$configs;
-    }
+    const SERVER_HOST = "mockServer";
+    const SERVER_PORT = "9000";
 }
