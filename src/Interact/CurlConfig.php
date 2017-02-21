@@ -34,9 +34,13 @@ class CurlConfig
     public static function loadConfig($customerCode, $userIdentity)
     {
         try {
+            if (is_array($userIdentity)) {
+                $userIdentity = array();
+            }    
             return CurlConfig::doCurl($customerCode, $userIdentity);
         } catch(Exception $e) {
             print_r($e->getCode() . " " . $e->getMessage());
+            return null;
         }
     }
 }
