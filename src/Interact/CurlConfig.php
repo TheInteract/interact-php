@@ -1,32 +1,34 @@
 <?php
 namespace Interact;
 
-use Exception;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7;
 use Interact\Config;
 
 class CurlConfig 
 {
-    public static function doCurl($apiKey, $userIdentity)
+    public static function doCurl($apiKey, $userIdentity) 
     {
-        var_dump('do curl');
-        $ch = curl_init();
-        $url = "http://" . Config::SERVER_HOST . ":" . Config::SERVER_PORT . "/api/event/oninit";
+        $url = "http://" . Config::SERVER_HOST . ":" . Config::SERVER_PORT;
+        $client = new Client([
+            'base_uri' => $url,
+            'timeout' => 2.0
+        ]);
+
         $body = json_encode(['customerCode' => $apiKey, 'userIdentity' => $userIdentity]);
-        
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Content-Length: ' . strlen($body)));
-
-        $response = curl_exec($ch);
-
-        if ($response === FALSE) {
-            throw new Exception(curl_error($ch), curl_errno($ch));
+        try{
+            $response = $client->request('POST', '/api/event/oninit', [
+                'body' => $body,
+                'headers' => [
+                    'Content-Type' => 'application/json'
+                ]
+            ]);
+        } catch(RequestException $e) {
+            throw $e;
         }
-        curl_close($ch);
 
-        return $response;
+        return $response->getBody();
     }
 
     public static function loadConfig($apiKey, $userIdentity = array())
