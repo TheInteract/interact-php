@@ -3,10 +3,14 @@
 require(__DIR__ . '/vendor/autoload.php');
 
 use Interact\Client;
-use Interact\CurlConfig;
-use Interact\User;
 
-// print_r(Client::world());
-// print_r(CurlConfig::loadConfig("BASDSAD", "ASDASDASD"));
-$user = new User("asdsad", "dsadsad", [["name" => "123123", "version" => "a"], ["name" => "asdasd", "version" => "b"]]);
-var_dump($user);
+function sample()
+{
+    $client = new Client("IC-sadsad", "1234");
+    $feature = $client->getFeature("feature-2")->isA();
+    // echo "Is Feature-2 A? =>".(var_dump($feature));
+    var_dump($feature);
+    // echo "Is Feature-2 B? =>".(print_r(!$feature));
+}
+
+sample();
