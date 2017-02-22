@@ -6,11 +6,11 @@ use Interact\Config;
 
 class CurlConfig 
 {
-    public static function doCurl($customerCode, $userIdentity)
+    public static function doCurl($apiKey, $userIdentity)
     {
         $ch = curl_init();
         $url = "http://" . Config::SERVER_HOST . ":" . Config::SERVER_PORT . "/api/event/oninit";
-        $body = ['customerCode' => $customerCode, 'userIdentity' => $userIdentity];
+        $body = ['apiKey' => $apiKey, 'userIdentity' => $userIdentity];
         
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -29,13 +29,10 @@ class CurlConfig
         return $response;
     }
 
-    public static function loadConfig($customerCode, $userIdentity)
+    public static function loadConfig($apiKey, $userIdentity = array())
     {
-        try {
-            if (is_array($userIdentity)) {
-                $userIdentity = array();
-            }    
-            return CurlConfig::doCurl($customerCode, $userIdentity);
+        try {  
+            return CurlConfig::doCurl($apiKey, $userIdentity);
         } catch(Exception $e) {
             print_r($e->getCode() . " " . $e->getMessage());
             return null;
