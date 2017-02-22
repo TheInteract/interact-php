@@ -27,7 +27,6 @@ class User
         return $this->featureList[$featureName];
     }
 
-    
     private function reduceFeature($carry, $feature) 
     {
         $carry[$feature['name']] = new Feature($feature['name'], $feature['version']);
