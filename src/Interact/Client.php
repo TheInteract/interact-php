@@ -24,17 +24,17 @@ class Client
         ];
         
         $result = json_decode(CurlConfig::loadConfig($this->_apiKey, $userIdentity), true);
-        $cookieLifeTime = time() + (100 * 365 * 24 * 60 * 60);
+        $cookieLifeTime = intval(time() + (10 * 365 * 24 * 60 * 60));
 
         setcookie(Config::COOKIE_DEVICE_CODE, $result['deviceCode'], $cookieLifeTime);
-        if(!is_null($result['userCode']))
-        {
-            setcookie(Config::COOKIE_USER_CODE, $result['userCode'], $cookieLifeTime);
-        } else {
-            setcookie(Config::COOKIE_USER_CODE, $result['userCode'], time() - 1);
-        }
+        // if(!is_null($result['userCode']))
+        // {
+        //     setcookie(Config::COOKIE_USER_CODE, $result['userCode'], $cookieLifeTime);
+        // } else {
+        //     setcookie(Config::COOKIE_USER_CODE, $result['userCode'], time() - 1);
+        // }
 
-        $this->_hashedUserId = $result['hashedUserId'];
+        // $this->_hashedUserId = $result['hashedUserId'];
         $this->_featureList = $result['featureList'];
         $this->_deviceCode = $result['deviceCode'];
 
@@ -44,15 +44,15 @@ class Client
     public function getFeature($featureName)
     {
         $config = [
-            'deviceCode' => $this->deviceCode,
-            'hashedUserId' => $this->hashedUserId,
-            'featureList' => $this->featureList
+            'deviceCode' => $this->_apiKey,
+            'hashedUserId' => $this->_hashedUserId,
+            'featureList' => $this->_featureList
         ];
-        if(count($this->featureList) === 0) 
+        if(count($this->_featureList) === 0) 
         {
             $config = $this->checkCookie();
         }
-        $this->_currentUser = new User($config['deviceCode'], $config['hashedUserId'], $config['featureList']);
+        $this->_currentUser = new User($config['deviceCode'], $config['hashedUserId'] = "", $config['featureList']);
 
         return $this->_currentUser->getFeature($featureName);
     }
