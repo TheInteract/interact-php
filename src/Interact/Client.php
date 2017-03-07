@@ -33,7 +33,7 @@ class Client
         {
             setcookie(Config::COOKIE_USER_CODE, $result['userCode'], $cookieLifeTime);
         } else if(isset($_COOKIE[Config::COOKIE_USER_CODE])) {
-            setcookie(Config::COOKIE_USER_CODE, $result['userCode'], time() - 1);
+            setcookie(Config::COOKIE_USER_CODE, "", time() - 1);
         }
 
         $this->_hashedUserId = array_key_exists('hashedUserId', $result) ? $result['hashedUserId'] : "";
