@@ -12,12 +12,13 @@ class Client
         $this->_apiKey = $apiKey;
         $this->_hashedUserId = $hashedUserId;
         $this->_featureList = [];
+
+        $this->initCookie();
     }
 
-    private function checkCookie()
+    private function initCookie()
     {
         $deviceCode = $_COOKIE[Config::COOKIE_DEVICE_CODE];
-        // $userCode = $_COOKIE[Config::COOKIE_USER_CODE];
         $userIdentity = [
             'deviceCode' => $deviceCode,
             'hashedUserId' => $this->_hashedUserId
@@ -27,18 +28,24 @@ class Client
         $cookieLifeTime = intval(time() + (10 * 365 * 24 * 60 * 60));
 
         setcookie(Config::COOKIE_DEVICE_CODE, $result['deviceCode'], $cookieLifeTime);
-        // if(!is_null($result['userCode']))
-        // {
-        //     setcookie(Config::COOKIE_USER_CODE, $result['userCode'], $cookieLifeTime);
-        // } else {
-        //     setcookie(Config::COOKIE_USER_CODE, $result['userCode'], time() - 1);
-        // }
+        
+        if(array_key_exists('userCode', $result))
+        {
+            setcookie(Config::COOKIE_USER_CODE, $result['userCode'], $cookieLifeTime);
+        } else if(isset($_COOKIE[Config::COOKIE_USER_CODE])) {
+            setcookie(Config::COOKIE_USER_CODE, $result['userCode'], time() - 1);
+        }
 
-        // $this->_hashedUserId = $result['hashedUserId'];
+        $this->_hashedUserId = array_key_exists('hashedUserId', $result) ? $result['hashedUserId'] : "";
+        $this->_userCode = array_key_exists('userCode', $result) ? $result['userCode'] : "";
         $this->_featureList = $result['featureList'];
         $this->_deviceCode = $result['deviceCode'];
+        $this->_initCode = $result['initCode'];
+    }
 
-        return $result;
+    public function getInitCode()
+    {
+        return $this->_initCode;
     }
     
     public function getFeature($featureName)
@@ -48,10 +55,6 @@ class Client
             'hashedUserId' => $this->_hashedUserId,
             'featureList' => $this->_featureList
         ];
-        if(count($this->_featureList) === 0) 
-        {
-            $config = $this->checkCookie();
-        }
         $this->_currentUser = new User($config['deviceCode'], $config['hashedUserId'] = "", $config['featureList']);
 
         return $this->_currentUser->getFeature($featureName);
