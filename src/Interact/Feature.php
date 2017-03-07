@@ -3,10 +3,9 @@ namespace Interact;
 
 class Feature
 {
-    public function __construct($name, $version)
+    public function __construct($versionName)
     {
-        $this->name = $name;
-        $this->version = strtoupper($version);
+        $this->versionName = strtoupper($versionName);
     }
 
     public function getName()
@@ -16,11 +15,11 @@ class Feature
 
     public function isA()
     {
-        return $this->version === "A";
+        return $this->versionName === "A";
     }
 
     public function isB()
     {
-        return $this->version === "B";
+        return $this->versionName === "B";
     }
 }

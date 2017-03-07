@@ -22,14 +22,17 @@ class User
         return $this->hashedUserId;
     }
 
-    public function getFeature($featureName)
+    public function getFeature($featureId)
     {
-        return $this->featureList[$featureName];
+        if(!array_key_exists($featureId, $this->featureList)) {
+            throw new Exception("Feature ID: ".$featureId." is not found.");
+        }
+        return $this->featureList[$featureId];
     }
 
     private function reduceFeature($carry, $feature) 
     {
-        $carry[$feature['name']] = new Feature($feature['name'], $feature['version']);
+        $carry[$feature['featureId']] = new Feature($feature['name']);
         return $carry;
     }
 }
