@@ -18,7 +18,7 @@ class Client
 
     private function initCookie()
     {
-        $deviceCode = $_COOKIE[Config::COOKIE_DEVICE_CODE];
+        $deviceCode = isset($_COOKIE[Config::COOKIE_DEVICE_CODE]) ? $_COOKIE[Config::COOKIE_DEVICE_CODE] : null;
         $userIdentity = [
             'deviceCode' => $deviceCode,
             'hashedUserId' => $this->_hashedUserId

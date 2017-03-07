@@ -32,7 +32,7 @@ class User
 
     private function reduceFeature($carry, $feature) 
     {
-        $carry[$feature['featureId']] = new Feature($feature['name']);
+        $carry[$feature['featureName']] = new Feature($feature['version']);
         return $carry;
     }
 }
