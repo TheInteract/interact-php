@@ -16,7 +16,7 @@ class CurlConfig
             'timeout' => 2.0
         ]);
 
-        $body = json_encode(['customerCode' => $apiKey, 'userIdentity' => $userIdentity]);
+        $body = json_encode(['API_KEY_PRIVATE' => $apiKey, 'userIdentity' => $userIdentity]);
         try{
             $response = $client->request('POST', '/api/event/oninit', [
                 'body' => $body,
