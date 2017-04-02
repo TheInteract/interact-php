@@ -92,3 +92,36 @@ $feature_1->isB()
 ```
 
 **Return** Boolean
+
+## Example
+```php
+<?php
+
+require(__DIR__ . '/vendor/autoload.php');
+
+use Interact\Client;
+
+$client = new Client("PRIVATE_KEY", "FAKE_USER_ID");
+?> 
+<html>
+    <head>
+        <title>Interact Example</title>
+    </head>
+    <body>
+        <?php
+            if ( $client->getFeature("FAKE_FEATURE_NAME")->isA() ) :
+        ?>
+            <h1>This is "FAKE_FEATURE_NAME", type A</h1>
+        <?php
+            else :
+        ?>
+            <h1>This is "FAKE_FEATURE_NAME", type B</h1>
+        <?php
+            endif; 
+        ?>
+        <script>
+            <?php echo $client->getInitCode() ?>
+        </script>
+    </body>
+</html>
+```
