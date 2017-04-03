@@ -8,7 +8,7 @@ composer require interact-project/interact-php
 ```
 
 ### 2. Create a new Interact Client with your private key
-You can pass your custom user id or not.
+You can pass your custom user id. Autogenerate if no user id passed.
 ```php
 $client = new Interact\Client("YOUR_PRIVATE_KEY", ["YOUR_CUSTOM_USER_ID"])
 ```
@@ -34,7 +34,7 @@ $client = new Interact\Client(private_key, [user_id])
 |Name|Type|Description|
 |----|:---:|---------|
 |private_key|string|Define who you are with private key which generate from interact|
-|user_id|string|`option` Pass your user id for defining your user on browser side |
+|user_id|string|`option` Pass your user id for defining your user on browser side. Autogenerate if no user_id passed. |
 
 **Return** Client class
 
