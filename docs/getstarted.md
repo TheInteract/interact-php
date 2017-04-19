@@ -93,6 +93,16 @@ $feature_1->isB()
 
 **Return** Boolean
 
+### Click Tracking
+Our system collects the clicking behavior only from the DOM element that is
+binded with `interact-click="{unique_id}"` attribute.
+
+```html
+<div id="button-1" interact-click="{unique_id}">
+    {...code...}
+</div>
+```
+
 ## Example
 ```php
 <?php
@@ -112,10 +122,12 @@ $client = new Client("PRIVATE_KEY", "FAKE_ACCOUNT_ID");
             if ( $client->getFeature("FAKE_FEATURE_NAME")->isA() ) :
         ?>
             <h1>This is "FAKE_FEATURE_NAME", type A</h1>
+            <div class="button" interact-click="btn-1">Sign In Type A</div>
         <?php
             else :
         ?>
             <h1>This is "FAKE_FEATURE_NAME", type B</h1>
+            <div class="button" interact-click="btn-2">Sign In Type B</div>
         <?php
             endif; 
         ?>
