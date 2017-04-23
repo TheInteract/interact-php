@@ -18,7 +18,7 @@ class CurlConfig
 
         $body = json_encode(['API_KEY_PRIVATE' => $apiKey, 'userIdentity' => $userIdentity]);
         try{
-            $response = $client->request('POST', '/event/oninit', [
+            $response = $client->post('/event/oninit', [
                 'body' => $body,
                 'headers' => [
                     'Content-Type' => 'application/json'
