@@ -10,7 +10,7 @@ class CurlConfig
 {
     public static function doCurl($apiKey, $userIdentity) 
     {
-        $url = "https://" . Config::SERVER_HOST . ":" . Config::SERVER_PORT;
+        $url = "http://" . Config::SERVER_HOST . ":" . Config::SERVER_PORT;
         $client = new Client([
             'base_uri' => $url,
             'timeout' => 2.0
